@@ -1,0 +1,14 @@
+{
+  "id": "che86mb12hv4jsje4tfe",
+  "image_id": "crp3q8daimscg34aoos8",
+  "scanned_at": "2025-08-05T17:41:00.405Z",
+  "status": "READY",
+  "vulnerabilities": {
+    "critical": "2",
+    "high": "7",
+    "medium": "22",
+    "low": "74",
+    "undefined": "1"
+  }
+}
+

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    image: shvirtd-example-python:latest
+    container_name: web_app
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: db
+      DB_USER: app
+      DB_PASSWORD: very_strong
+      DB_NAME: example
+    networks:
+      backend:
+        ipv4_address: 172.20.0.5
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: example
+      MYSQL_USER: app
+      MYSQL_PASSWORD: very_strong
+    networks:
+      backend:
+        ipv4_address: 172.20.0.10
+    restart: always
+
+include:
+  - proxy.yaml
+
+networks:
+  backend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
